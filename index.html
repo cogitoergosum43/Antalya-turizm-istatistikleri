@@ -1,0 +1,399 @@
+<title>Antalya Turizm Panosu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;500;600&family=Fira+Sans:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: summary strip on top; then sections A–E, each a row with the source's content map (left) and its figure card (right); tables at the bottom. Each source keeps its own site colours. */
+:root {
+  --bg: #f4f7f7;
+  --panel: #ffffff;
+  --fg: #1f2a2c;
+  --muted: #5d6b6d;
+  --line: #dfe6e6;
+  --ktb: #2b7a78;
+  --ktb-soft: #e6f2f1;
+  --ktb-red: #d7262b;
+  --tuik: #3f63c9;
+  --tuik-soft: #eaf0fc;
+  --hav: #263a55;
+  --hav-soft: #e9eef5;
+  --hav-red: #b3261e;
+  --up: #1f7a4d;
+  --down: #c2410c;
+  --wait: #8a6d1d;
+  --wait-soft: #fbf3d9;
+  --f-head: "Fira Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --f-body: "Fira Sans", Arial, sans-serif;
+  --f-mono: "Fira Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1616; --panel: #152121; --fg: #e2ecea; --muted: #9fb0ae; --line: #263535;
+  --ktb: #62bdb8; --ktb-soft: #183331; --ktb-red: #f0595d;
+  --tuik: #8ea8f2; --tuik-soft: #1a2440; --hav: #a9c0e0; --hav-soft: #1b2636; --hav-red: #f07a73;
+  --up: #5fd39a; --down: #fb9a62; --wait: #e7c65f; --wait-soft: #2c2712; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1616; --panel: #152121; --fg: #e2ecea; --muted: #9fb0ae; --line: #263535;
+  --ktb: #62bdb8; --ktb-soft: #183331; --ktb-red: #f0595d;
+  --tuik: #8ea8f2; --tuik-soft: #1a2440; --hav: #a9c0e0; --hav-soft: #1b2636; --hav-red: #f07a73;
+  --up: #5fd39a; --down: #fb9a62; --wait: #e7c65f; --wait-soft: #2c2712; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+a { color: var(--ktb); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ktb-red); outline-offset: 2px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Header */
+.top { border-top: 5px solid var(--ktb-red); background: var(--panel); border-bottom: 1px solid var(--line); }
+.top .wrap { padding-block: 18px 14px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; }
+.top h1 { margin: 0; font-family: var(--f-head); font-weight: 400; font-size: clamp(26px, 4vw, 36px); color: var(--ktb); letter-spacing: .01em; text-wrap: balance; }
+.top p { margin: 2px 0 0; color: var(--muted); }
+.stamp { font-family: var(--f-mono); font-size: 12px; color: var(--muted); text-align: right; }
+
+/* Section nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 8px; }
+.nav a { flex: none; text-decoration: none; font-family: var(--f-head); font-size: 15px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg); background: var(--panel); transition: background .2s, color .2s; }
+.nav a b { font-weight: 600; margin-right: 4px; }
+.nav a:hover { background: var(--ktb); color: #fff; border-color: var(--ktb); }
+.nav a.tuik:hover { background: var(--tuik); border-color: var(--tuik); }
+.nav a.hav:hover { background: var(--hav); border-color: var(--hav); color: var(--panel); }
+
+/* KPI strip */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px; padding-block: 20px 8px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; animation: rise .5s ease-out both; }
+.kpi .src { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.kpi .src.ktb { color: var(--ktb); } .kpi .src.tuik { color: var(--tuik); } .kpi .src.hav { color: var(--hav); }
+.kpi .lbl { font-size: 13px; color: var(--muted); }
+.kpi .val { font-family: var(--f-head); font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .val small { font-size: 16px; font-weight: 400; color: var(--muted); }
+.chg { font-size: 13px; font-variant-numeric: tabular-nums; }
+.chg.up { color: var(--up); } .chg.down { color: var(--down); }
+@keyframes rise { from { transform: translateY(6px); } to { transform: none; } }
+
+/* Sections */
+.hint { color: var(--muted); font-size: 13px; padding-block: 4px 12px; }
+.sec { display: grid; grid-template-columns: minmax(0, 1fr); margin-bottom: 14px; scroll-margin-top: 60px; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 960px) { .split { grid-template-columns: 1fr; } }
+.right { display: grid; align-content: start; gap: 12px; min-width: 0; }
+.rhead { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.rhead .letter { background: var(--hav); color: var(--panel); }
+.rnote { margin: 0; font-size: 13px; color: var(--muted); }
+.rnote a { color: var(--hav); }
+.right h2 { margin: 0; font-family: var(--f-head); font-weight: 400; font-size: 20px; color: var(--hav); letter-spacing: .02em; }
+
+@media (max-width: 860px) { .sec { grid-template-columns: 1fr; } }
+.map, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.map { overflow: hidden; }
+.sec-head { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.letter { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-head); font-weight: 600; font-size: 19px; color: #fff; background: var(--ktb); }
+.sec.tuik .letter { background: var(--tuik); } .sec.hav .letter { background: var(--hav); color: var(--panel); }
+.sec-head h2 { margin: 0; font-family: var(--f-head); font-weight: 400; font-size: 22px; letter-spacing: .02em; color: var(--ktb); line-height: 1.15; }
+.sec.tuik h2 { color: var(--tuik); } .sec.hav h2 { color: var(--hav); }
+.sec-head .site { font-size: 12px; color: var(--muted); font-family: var(--f-mono); }
+.sec-head .site a { color: inherit; }
+.body { padding: 12px 16px 16px; display: grid; gap: 14px; }
+
+/* File rows */
+.group-t { font-family: var(--f-head); font-size: 15px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 0; }
+.file { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
+.code { font-family: var(--f-mono); font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--ktb-soft); color: var(--ktb); white-space: nowrap; margin-top: 2px; }
+.sec.tuik .code { background: var(--tuik-soft); color: var(--tuik); } .sec.hav .code { background: var(--hav-soft); color: var(--hav); }
+.file a.dl { font-weight: 500; text-decoration: none; border-bottom: 1px solid currentColor; }
+.file a.dl:hover { color: var(--ktb-red); }
+.sec.tuik .file a.dl { color: var(--tuik); } .sec.hav .file a.dl { color: var(--hav); }
+.file .meta { display: block; font-size: 12px; color: var(--muted); }
+.months { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 13px; }
+.months a { text-decoration: none; }
+.months a:hover { color: var(--ktb-red); text-decoration: underline; }
+
+/* Arrow tree: what the file contains */
+.tree { list-style: none; margin: 6px 0 0 4px; padding: 0 0 0 16px; border-left: 2px solid var(--line); display: grid; gap: 4px; }
+.tree li { position: relative; font-size: 14px; }
+.tree li::before { content: ""; position: absolute; left: -16px; top: .75em; width: 12px; border-top: 2px solid var(--line); }
+.tree li::after { content: ""; position: absolute; left: -6px; top: calc(.75em - 4px); border: 5px solid transparent; border-left-color: var(--line); border-right: 0; }
+.tree li em { font-style: normal; color: var(--muted); font-size: 13px; }
+.tree .fig { font-family: var(--f-mono); font-size: 12px; color: var(--ktb); background: var(--ktb-soft); padding: 0 5px; border-radius: 3px; }
+.sec.tuik .tree .fig { color: var(--tuik); background: var(--tuik-soft); } .sec.hav .tree .fig { color: var(--hav); background: var(--hav-soft); }
+.tree .tref { font-size: 12px; color: var(--muted); }
+.tree .tref a { color: inherit; }
+.file:hover .tree, .file:focus-within .tree { border-left-color: var(--ktb); }
+.file:hover .tree li::before, .file:focus-within .tree li::before { border-top-color: var(--ktb); }
+.file:hover .tree li::after, .file:focus-within .tree li::after { border-left-color: var(--ktb); }
+.sec.tuik .file:hover .tree { border-left-color: var(--tuik); }
+.sec.tuik .file:hover .tree li::before { border-top-color: var(--tuik); }
+.sec.tuik .file:hover .tree li::after { border-left-color: var(--tuik); }
+.tree, .tree li::before, .tree li::after { transition: border-color .25s; }
+
+.note { font-size: 13px; padding: 8px 10px; border-radius: 6px; background: var(--wait-soft); color: var(--wait); }
+.note b { font-weight: 600; }
+.pill { display: inline-block; font-size: 11px; font-family: var(--f-mono); padding: 1px 6px; border-radius: 999px; background: var(--wait-soft); color: var(--wait); white-space: nowrap; }
+
+/* Figure cards */
+.card { padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.card h3 { margin: 0; font-family: var(--f-head); font-weight: 500; font-size: 15px; color: var(--muted); letter-spacing: .03em; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
+.fact .v { font-family: var(--f-head); font-size: 26px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.fact .v small { font-size: 14px; color: var(--muted); font-weight: 400; }
+.fact .l { font-size: 12.5px; color: var(--muted); }
+.card .foot { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* Tables */
+.tables-h { font-family: var(--f-head); font-weight: 400; font-size: 26px; color: var(--ktb); margin: 28px 0 4px; }
+.tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 14px; margin-bottom: 14px; }
+.tcard { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; scroll-margin-top: 60px; }
+.tcard .th { padding: 9px 14px; color: #fff; background: var(--ktb); font-family: var(--f-head); font-size: 16px; font-weight: 500; display: flex; gap: 8px; align-items: baseline; }
+.tcard.tuik .th { background: var(--tuik); } .tcard.hav .th { background: var(--hav); color: var(--panel); }
+.tcard .th span { font-family: var(--f-mono); font-size: 12px; opacity: .85; }
+.tscroll { overflow-x: auto; max-height: 440px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+thead th { position: sticky; top: 0; background: var(--panel); font-weight: 600; font-size: 12.5px; color: var(--muted); }
+thead tr.g th { text-align: center; color: var(--fg); border-bottom: 1px solid var(--line); }
+tbody tr:hover td { background: var(--ktb-soft); }
+.tcard.tuik tbody tr:hover td { background: var(--tuik-soft); }
+.tcard.hav tbody tr:hover td { background: var(--hav-soft); }
+tr.sum td { font-weight: 600; border-top: 2px solid var(--fg); }
+tr.sub td { color: var(--muted); }
+td.up { color: var(--up); } td.down { color: var(--down); }
+td.na { color: var(--wait); }
+.tfoot { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); padding: 8px 14px; }
+footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; border-top: 1px solid var(--line); margin-top: 20px; }
+
+@media (prefers-reduced-motion: reduce) { .kpi { animation: none; } * { transition: none !important; } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <h1>Antalya Turizm İstatistikleri</h1>
+      <p>Beş kaynak tek sayfada: hangi rakam hangi dosyada, son değer ne.</p>
+    </div>
+    <div class="stamp">Pano tarihi: 03.11.2026<br>Prototip · bazı rakamlar bekleniyor</div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Bölümler">
+  <div class="wrap">
+    <a href="#A"><b>A</b>Sınır İstatistikleri</a>
+    <a href="#B"><b>B</b>Turizm Gelirleri ve Giderleri</a>
+    <a href="#C"><b>C</b>Konaklama İstatistikleri</a>
+    <a href="#D" class="hav"><b>D</b>Antalya Havalimanı</a>
+    <a href="#E" class="tuik"><b>E</b>TÜİK</a>
+      </div>
+</nav>
+
+<main class="wrap">
+  <section class="kpis" aria-label="Özet">
+    <div class="kpi"><span class="src hav">D · Havalimanı</span><span class="lbl">Havayolu gelen yolcu, Ekim 2026</span><span class="val" data-n="1975277">1.975.277</span><span class="chg down">▼ %8,3 · Ekim 2025: 2.155.231</span></div>
+    <div class="kpi"><span class="src hav">D · Havalimanı</span><span class="lbl">Havayolu gelen yolcu, Ocak–Ekim 2026</span><span class="val" data-n="14993854">14.993.854</span><span class="chg down">▼ %5,8</span></div>
+    <div class="kpi"><span class="src ktb">C · Konaklama</span><span class="lbl">Antalya geceleme, Ocak–Ağustos 2026</span><span class="val"><span data-n="64.4" data-d="1">64,4</span> <small>milyon</small></span><span class="chg down">▼ %11,9</span></div>
+    <div class="kpi"><span class="src ktb">C · Konaklama</span><span class="lbl">Antalya doluluk, Ocak–Ağustos 2026</span><span class="val">%<span data-n="56.29" data-d="2">56,29</span></span><span class="chg down">▼ 3,4 puan</span></div>
+    <div class="kpi"><span class="src tuik">E · TÜİK</span><span class="lbl">Turizm geliri, III. çeyrek 2026</span><span class="val"><span data-n="25.5" data-d="1">25,5</span> <small>milyar $</small></span><span class="chg up">▲ %5,0</span></div>
+    <div class="kpi"><span class="src tuik">E · TÜİK</span><span class="lbl">Çıkış yapan ziyaretçi, III. çeyrek 2026</span><span class="val"><span data-n="23.3" data-d="1">23,3</span> <small>milyon</small></span><span class="chg down">▼ %1,6</span></div>
+  </section>
+
+  <p class="hint">Mavi-yeşil başlıklar Kültür ve Turizm Bakanlığı (yigm.ktb.gov.tr), lacivert Antalya Havalimanı, mavi TÜİK. Dosya adına tıklayınca dosya iner. Oklar dosyanın içinde ne olduğunu gösterir.</p>
+
+  <div class="split">
+  <div class="left">
+  <!-- A -->
+  <section class="sec" id="A">
+    <div class="map">
+      <div class="sec-head"><span class="letter">A</span><div><h2>SINIR İSTATİSTİKLERİ</h2><div class="site"><a href="https://yigm.ktb.gov.tr/TR-249702/sinir-istatistikleri.html">yigm.ktb.gov.tr › Turizm İstatistikleri</a></div></div></div>
+      <div class="body">
+        <p class="group-t">Aylık bülten</p>
+        <div class="file">
+          <span class="code">202611_A</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/153006,eylul-2026-haber-bultenixls.xls?0">2026 Yılı Eylül Ayı Sınır Giriş-Çıkış İstatistikleri</a>
+            <span class="meta">xls · son yayımlanan ay</span>
+            <ul class="tree">
+              <li>Gelen vatandaşlar</li>
+              <li>Gelen yabancılar</li>
+              <li>İlk 5 ülke <em>Rusya, Almanya, İngiltere, İran, Polonya</em></li>
+              <li>Taşıt aracına göre <em>hava, deniz, kara, demiryolu</em></li>
+              <li>İller ve taşıt <span class="fig">Antalya, Eylül: 2.192.864</span> <span class="pill">notundan · bültenle teyit edilecek</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="months" aria-label="2026 aylık bültenler">
+          <span style="color:var(--muted)">2026'nın diğer ayları:</span>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/144878,ocak-2026-haber-bultenixls.xls?0">Ocak</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/145624,s-bat-2026-haber-bultenixls.xls?0">Şubat</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/146347,mart-2026-haber-bultenixls.XLS?0">Mart</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/147906,nisan--2026-haber-bultenixls.XLS?0">Nisan</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/148357,mayis-2026-bultenixls.XLS?0">Mayıs</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/150184,haziran-2026-bultenixls.xls?0">Haziran</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/150564,temm-z-2026-bultenixls.xls?0">Temmuz</a>
+          <a href="https://yigm.ktb.gov.tr/Eklenti/151440,ag-stos-2026-bultenixls.xls?0">Ağustos</a>
+        </div>
+        <p class="group-t">Yıllık bülten</p>
+        <div class="file">
+          <span class="code">202611_A</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/145395,2025yilliksinirbultenixlsx.xlsx?0">Sınır İstatistikleri Yıllık Bülteni (2025)</a>
+            <span class="meta">xlsx · 2024 ve öncesi: <a href="https://yigm.ktb.gov.tr/TR-249709/yillik-bultenler.html">Yıllık Bültenler</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section class="sec" id="B">
+    <div class="map">
+      <div class="sec-head"><span class="letter">B</span><div><h2>TURİZM GELİRLERİ VE GİDERLERİ</h2><div class="site"><a href="https://yigm.ktb.gov.tr/TR-201116/turizm-gelirleri-ve-giderleri.html">yigm.ktb.gov.tr › Turizm İstatistikleri</a></div></div></div>
+      <div class="body">
+        <div class="note"><b>YİGM'de en son 2026 Haziran verileri bulunmaktadır.</b> Dosyalar 2023/01–2026/06 dönemini kapsar. Güncel çeyrek için E (TÜİK).</div>
+        <div class="file">
+          <span class="code">202611_B</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/150204,turizm-geliri-2023-2026xls.xls?0">Turizm-geliri-2023-2026</a>
+            <span class="meta">xls · aylık</span>
+            <ul class="tree"><li>Ziyaretçilerin turizm geliri</li><li>Transfer yolcu turizm geliri</li><li>Toplam turizm geliri <em>bin $</em></li><li>Değişim oranları <em>2024/2023, 2025/2024, 2026/2025</em></li></ul>
+          </div>
+        </div>
+        <div class="file">
+          <span class="code">202611_B</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/150205,turizm-gideri-2023-2026xls.xls?0">Turizm-gideri-2023-2026</a>
+            <span class="meta">xls · aylık</span>
+            <ul class="tree"><li>Yurt dışına çıkan vatandaşların harcaması <em>bin $</em></li></ul>
+          </div>
+        </div>
+        <div class="file">
+          <span class="code">202611_B</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/150206,turizm-geliri-gideri-ortalama-harcama-2004-2026xls.xls?0">Turizm-geliri-gideri-ve-ortalama-harcama-2004-2026</a>
+            <span class="meta">xls · yıllık / 6 aylık</span>
+            <ul class="tree"><li>Turizm geliri</li><li>Gelen ziyaretçi</li><li>Ortalama harcama <em>$ / kişi</em></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section class="sec" id="C">
+    <div class="map">
+      <div class="sec-head"><span class="letter">C</span><div><h2>KONAKLAMA İSTATİSTİKLERİ</h2><div class="site"><a href="https://yigm.ktb.gov.tr/TR-201120/konaklama-istatistikleri.html">yigm.ktb.gov.tr › Turizm İstatistikleri</a></div></div></div>
+      <div class="body">
+        <p class="group-t">Bakanlık Belgeli Tesis Konaklama İstatistikleri</p>
+        <div class="file">
+          <span class="code">202611_C</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/152772,konaklama-aylik-b-lten-2026-ag-stos-06102026xlsx.xlsx?0">2026 Yılı Ağustos Ayı Bakanlık Belgeli Konaklama İstatistikleri Aylık Bülten</a>
+            <span class="meta">xlsx · son yayımlanan ay (06.10.2026'da yüklendi)</span>
+            <ul class="tree">
+              <li>Tesise geliş sayısı <em>yabancı, yerli · aylık ve yılbaşından beri</em></li>
+              <li>Geceleme <em>yabancı, yerli · aylık ve yılbaşından beri</em></li>
+              <li>Ortalama kalış süresi</li>
+              <li>Doluluk oranı</li>
+              <li>İl bazında <span class="fig">Antalya, Oca–Ağu: 64,4 mn geceleme</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="file">
+          <span class="code">202611_C</span>
+          <div>
+            <a class="dl" href="https://yigm.ktb.gov.tr/Eklenti/145670,konaklama-yillik-b-lten-2025-ver2xlsx.xlsx?0">2025 Yılı Bakanlık Belgeli Konaklama İstatistikleri Yıllık Bülten</a>
+            <span class="meta">xlsx</span>
+          </div>
+        </div>
+        <p class="group-t">Belediye Belgeli Tesis Konaklama İstatistikleri</p>
+        <div class="note"><b>Belediye belgeli tesislerin en son verileri 2022 yılına aittir:</b> son aylık bülten <a href="https://yigm.ktb.gov.tr/Eklenti/106454,ekim-2022-belediye-belgeli-aylik-bultenxlsx.xlsx?0">Ekim 2022</a>, son yıllık bülten 2022. Sonrasına ait veri yer almıyor; bu tesisler Kasım 2022'den itibaren basit konaklama belgesiyle Bakanlık belgeli seriye geçti.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- D -->
+  <section class="sec hav" id="D">
+    <div class="map">
+      <div class="sec-head"><span class="letter">D</span><div><h2>ANTALYA HAVALİMANI MÜLKİ İDARE AMİRLİĞİ</h2><div class="site"><a href="https://www.antalyahavalimani.gov.tr/duyurular">antalyahavalimani.gov.tr › Duyurular</a></div></div></div>
+      <div class="body">
+        <div class="file">
+          <span class="code">202611_D</span>
+          <div>
+            <a class="dl" href="https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf">2026 Yılı Ekim Ayı Milliyetlerine Göre Gelen Yolcu Sayıları</a>
+            <span class="meta">pdf · duyuru 03.11.2026 · son yayımlanan ay · önceki aylar: <a href="https://www.antalyahavalimani.gov.tr/duyurular">Duyurular</a></span>
+            <ul class="tree">
+              <li>Aylık gelen yolcu, milliyete göre <em>2022–2026</em></li>
+              <li>Ocak'tan bugüne kümülatif, milliyete göre</li>
+              <li>T.C. vatandaşları ayrı satır <em>yabancı sayılmaz</em></li>
+              <li>Yıllık toplamlar</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Kapsam:</b> yalnız Antalya Havalimanı dış hatlar. Gazipaşa ve deniz yolu yok; bu yüzden A'daki Antalya rakamından biraz düşük.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E -->
+  <section class="sec tuik" id="E">
+    <div class="map">
+      <div class="sec-head"><span class="letter">E</span><div><h2>TÜİK · TURİZM İSTATİSTİKLERİ</h2><div class="site"><a href="https://veriportali.tuik.gov.tr/tr/statistical-themes">veriportali.tuik.gov.tr › Turizm › Gelen ve Giden Ziyaretçi İstatistikleri</a></div></div></div>
+      <div class="body">
+        <div class="file">
+          <span class="code">202611_E</span>
+          <div>
+            <a class="dl" href="https://veriportali.tuik.gov.tr/tr/press/58144">Turizm İstatistikleri, III. Çeyrek: Temmuz-Eylül, 2026</a>
+            <span class="meta">TÜİK Veri Portalı · sayı 58144 · 30.10.2026 · Excel tabloları bülten sayfasının sağında · önceki çeyrekler: <a href="https://veriportali.tuik.gov.tr/tr/press/58143">II. Ç 2026</a>, <a href="https://veriportali.tuik.gov.tr/tr/press/58142">I. Ç 2026</a>, <a href="https://veriportali.tuik.gov.tr/tr/press/54158">IV. Ç 2025</a></span>
+            <ul class="tree">
+              <li><a href="https://veriportali.tuik.gov.tr/tr/press/58144">Bültendeki ana tablo</a> <em>turizm geliri, ziyaretçi turizm geliri, ziyaretçi sayısı · bülten sayfasında</em></li>
+              <li><a href="Gelen/202611_E_Aylık turizm geliri.xls">Aylık turizm geliri</a> <span class="code">202611_E</span> <em>xls · gelir, transfer yolcu, ziyaretçi geliri, ziyaretçi sayısı</em></li>
+              <li><a href="Gelen/202611_E_Çıkış Yapan Ziyaretçi Sayısı ve Ortalama Geceleme Sayısı.xls">Çıkış Yapan Ziyaretçi Sayısı ve Ortalama Geceleme Sayısı</a> <span class="code">202611_E</span> <em>xls · toplam, vatandaş</em></li>
+              <li>Diğer tablolar <em>aylık turizm gideri, geliş nedeni, harcama türü, kişi başı harcama, yurt dışı ikametli vatandaşlar · <a href="https://veriportali.tuik.gov.tr/tr/press/58144">bülten sayfasından</a></em></li>
+            </ul>
+            <div class="note" style="margin-top:8px"><b>Excel linkleri klasördeki kopyalara gider</b> (Turizm_Dashboard_Projesi/Gelen). TÜİK her indirmede süreli bir adres verdiği için doğrudan bağlanamıyor; bu linkler panoyu klasörden açınca çalışır.</div>
+          </div>
+        </div>
+        <div class="note"><b>Antalya kırılımı yok.</b> TÜİK il bazında vermez. Ana kaynak TÜİK'tir; yeni çeyrekte önceki çeyrek revize edilir.</div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+  <aside class="right" aria-label="Sağ taraf">
+    <div class="rhead hav"><span class="letter">D</span><h2>ANTALYA HAVALİMANI MÜLKİ İDARE AMİRLİĞİ VERİLERİ</h2></div>
+    <p class="rnote">Kaynak dosya: <a href="https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf">2026 Yılı Ekim Ayı Milliyetlerine Göre Gelen Yolcu Sayıları</a> (pdf, 03.11.2026). Yalnız Antalya Havalimanı dış hat gelen yolcu; T.C. vatandaşları ayrı satırda.</p>
+    <div class="tcard hav"><div class="th">Tablo 1: Milliyetlerine göre Antalya'ya hava yolu ile gelen ziyaretçi sayısı <span>tam yıl</span></div><div class="tscroll">
+<table><thead><tr><th>Milliyet</th><th>2023</th><th>2024</th><th>2025</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.421.650</td><td>3.851.710</td><td>3.965.580</td></tr><tr class=""><td>Almanya</td><td>3.344.963</td><td>3.488.051</td><td>3.533.669</td></tr><tr class=""><td>İngiltere</td><td>1.305.940</td><td>1.552.114</td><td>1.533.498</td></tr><tr class=""><td>Polonya</td><td>1.067.432</td><td>1.263.737</td><td>1.279.108</td></tr><tr class=""><td>Kazakistan</td><td>395.818</td><td>449.385</td><td>375.560</td></tr><tr class="sum"><td>Genel toplam</td><td>15.388.418</td><td>16.526.644</td><td>16.710.721</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2025</span></div></div>
+    <div class="tcard hav"><div class="th">Tablo 2: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ocak–Ekim) <span>2026'ya göre sıralı</span></div><div class="tscroll">
+<table><thead><tr><th>Milliyet</th><th>2025 (ilk 10 ay)</th><th>2026 (ilk 10 ay)</th><th>Artış / azalış</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.818.638</td><td>3.774.677</td><td class="down">−1,2%</td></tr><tr class=""><td>Almanya</td><td>3.322.941</td><td>3.100.042</td><td class="down">−6,7%</td></tr><tr class=""><td>İngi̇ltere</td><td>1.451.986</td><td>1.282.430</td><td class="down">−11,7%</td></tr><tr class=""><td>Polonya</td><td>1.247.070</td><td>1.177.984</td><td class="down">−5,5%</td></tr><tr class=""><td>Ukrayna</td><td>409.185</td><td>432.427</td><td class="up">+5,7%</td></tr><tr class=""><td>Hollanda</td><td>417.878</td><td>406.417</td><td class="down">−2,7%</td></tr><tr class=""><td>Romanya</td><td>409.405</td><td>348.187</td><td class="down">−15,0%</td></tr><tr class=""><td>Kazaki̇stan</td><td>362.833</td><td>344.701</td><td class="down">−5,0%</td></tr><tr class=""><td>Çekya</td><td>287.238</td><td>264.096</td><td class="down">−8,1%</td></tr><tr class=""><td>Li̇tvanya</td><td>236.513</td><td>210.501</td><td class="down">−11,0%</td></tr><tr class=""><td>Slovakya</td><td>196.687</td><td>175.088</td><td class="down">−11,0%</td></tr><tr class=""><td>Belarus</td><td>180.311</td><td>166.571</td><td class="down">−7,6%</td></tr><tr class=""><td>Avusturya</td><td>182.315</td><td>162.930</td><td class="down">−10,6%</td></tr><tr class=""><td>Belçi̇ka</td><td>172.634</td><td>160.853</td><td class="down">−6,8%</td></tr><tr class=""><td>Macari̇stan</td><td>131.595</td><td>150.311</td><td class="up">+14,2%</td></tr><tr class=""><td>İsvi̇çre</td><td>162.713</td><td>141.858</td><td class="down">−12,8%</td></tr><tr class=""><td>Fransa</td><td>170.075</td><td>141.071</td><td class="down">−17,1%</td></tr><tr class=""><td>Moldova</td><td>181.130</td><td>138.928</td><td class="down">−23,3%</td></tr><tr class=""><td>Dani̇marka</td><td>144.960</td><td>133.893</td><td class="down">−7,6%</td></tr><tr class=""><td>İsveç</td><td>139.502</td><td>122.553</td><td class="down">−12,1%</td></tr><tr class=""><td>Norveç</td><td>83.305</td><td>75.260</td><td class="down">−9,7%</td></tr><tr class=""><td>İtalya</td><td>38.071</td><td>32.742</td><td class="down">−14,0%</td></tr><tr class=""><td>Fi̇nlandi̇ya</td><td>35.448</td><td>31.163</td><td class="down">−12,1%</td></tr><tr class=""><td>K.K.T.C.</td><td>20.439</td><td>22.236</td><td class="up">+8,8%</td></tr><tr class=""><td>Slovenya</td><td>16.351</td><td>14.631</td><td class="down">−10,5%</td></tr><tr class=""><td>İran</td><td>43.245</td><td>12.099</td><td class="down">−72,0%</td></tr><tr class=""><td>İsrai̇l</td><td>6.753</td><td>11.006</td><td class="up">+63,0%</td></tr><tr class="sub"><td>Di̇ğer</td><td>1.122.468</td><td>1.050.086</td><td class="down">−6,4%</td></tr><tr class="sub"><td>Türki̇ye (T.C. Vatandaşı)</td><td>927.067</td><td>909.113</td><td class="down">−1,9%</td></tr><tr class="sum"><td>Toplam</td><td>15.918.756</td><td>14.993.854</td><td class="down">−5,8%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+    <div class="tcard hav"><div class="th">Tablo 3: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ekim) <span>2026'ya göre sıralı</span></div><div class="tscroll">
+<table><thead><tr><th>Milliyet</th><th>Ekim 2025</th><th>Ekim 2026</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Almanya</td><td>631.509</td><td>583.828</td><td class="down">−7,6%</td></tr><tr class=""><td>Rusya</td><td>571.178</td><td>520.371</td><td class="down">−8,9%</td></tr><tr class=""><td>İngi̇ltere</td><td>177.298</td><td>155.686</td><td class="down">−12,2%</td></tr><tr class=""><td>Polonya</td><td>140.632</td><td>128.040</td><td class="down">−9,0%</td></tr><tr class=""><td>Hollanda</td><td>59.484</td><td>53.676</td><td class="down">−9,8%</td></tr><tr class=""><td>Ukrayna</td><td>48.401</td><td>50.251</td><td class="up">+3,8%</td></tr><tr class=""><td>Li̇tvanya</td><td>48.978</td><td>42.619</td><td class="down">−13,0%</td></tr><tr class=""><td>İsvi̇çre</td><td>39.119</td><td>31.929</td><td class="down">−18,4%</td></tr><tr class=""><td>Belarus</td><td>24.558</td><td>23.898</td><td class="down">−2,7%</td></tr><tr class=""><td>Çekya</td><td>20.695</td><td>19.844</td><td class="down">−4,1%</td></tr><tr class=""><td>Estonya</td><td>21.537</td><td>19.251</td><td class="down">−10,6%</td></tr><tr class=""><td>Kazaki̇stan</td><td>17.611</td><td>17.076</td><td class="down">−3,0%</td></tr><tr class=""><td>Dani̇marka</td><td>18.373</td><td>16.969</td><td class="down">−7,6%</td></tr><tr class=""><td>Fransa</td><td>19.847</td><td>16.739</td><td class="down">−15,7%</td></tr><tr class=""><td>Romanya</td><td>14.611</td><td>16.424</td><td class="up">+12,4%</td></tr><tr class=""><td>Avusturya</td><td>16.072</td><td>14.565</td><td class="down">−9,4%</td></tr><tr class=""><td>Belçi̇ka</td><td>19.457</td><td>14.536</td><td class="down">−25,3%</td></tr><tr class=""><td>İsveç</td><td>14.982</td><td>14.459</td><td class="down">−3,5%</td></tr><tr class=""><td>Macari̇stan</td><td>12.113</td><td>12.979</td><td class="up">+7,1%</td></tr><tr class=""><td>Moldova</td><td>13.136</td><td>10.735</td><td class="down">−18,3%</td></tr><tr class=""><td>Norveç</td><td>6.898</td><td>7.571</td><td class="up">+9,8%</td></tr><tr class=""><td>Fi̇nlandi̇ya</td><td>7.146</td><td>6.248</td><td class="down">−12,6%</td></tr><tr class=""><td>İtalya</td><td>4.591</td><td>5.202</td><td class="up">+13,3%</td></tr><tr class=""><td>Slovakya</td><td>5.987</td><td>4.606</td><td class="down">−23,1%</td></tr><tr class=""><td>Sirbi̇stan</td><td>3.275</td><td>2.863</td><td class="down">−12,6%</td></tr><tr class=""><td>Slovenya</td><td>2.231</td><td>2.262</td><td class="up">+1,4%</td></tr><tr class=""><td>Azerbaycan</td><td>2.653</td><td>2.239</td><td class="down">−15,6%</td></tr><tr class=""><td>K.K.T.C.</td><td>1.713</td><td>1.681</td><td class="down">−1,9%</td></tr><tr class=""><td>İran</td><td>2.181</td><td>1.044</td><td class="down">−52,1%</td></tr><tr class=""><td>İsrai̇l</td><td>487</td><td>726</td><td class="up">+49,1%</td></tr><tr class=""><td>Arnavutluk</td><td>673</td><td>610</td><td class="down">−9,4%</td></tr><tr class="sub"><td>Di̇ğer</td><td>88.820</td><td>80.922</td><td class="down">−8,9%</td></tr><tr class="sub"><td>Türki̇ye (T.C. Vatandaşı)</td><td>98.985</td><td>95.428</td><td class="down">−3,6%</td></tr><tr class="sum"><td>Toplam</td><td>2.155.231</td><td>1.975.277</td><td class="down">−8,3%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+  </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Kaynaklar: T.C. Kültür ve Turizm Bakanlığı Yatırım ve İşletmeler Genel Müdürlüğü (yigm.ktb.gov.tr), Antalya Havalimanı Mülki İdare Amirliği (antalyahavalimani.gov.tr), TÜİK. Pano kişisel çalışma amaçlıdır.</div>
+</footer>
+
+<script>
+(function () {
+  // Count-up on the summary strip
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    document.querySelectorAll('[data-n]').forEach(function (el) {
+      var to = parseFloat(el.getAttribute('data-n')), dec = +(el.getAttribute('data-d') || 0);
+      var fmt = new Intl.NumberFormat('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+      var t0 = null, dur = 1100;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmt.format(to * e);
+        if (k < 1) requestAnimationFrame(step); else el.textContent = fmt.format(to);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+})();
+</script>
