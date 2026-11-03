@@ -166,6 +166,72 @@ td.na { color: var(--wait); }
 footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; border-top: 1px solid var(--line); margin-top: 20px; }
 
 @media (prefers-reduced-motion: reduce) { .kpi { animation: none; } * { transition: none !important; } }
+.nav { overflow-x: auto; max-width: 100vw; }
+/* Summary bands */
+.bands { display: grid; gap: 16px; padding-block: 20px 8px; }
+.band { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.band-h { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; padding: 12px 18px; border-bottom: 1px solid var(--line); border-top: 4px solid var(--ktb); }
+.band.hav .band-h { border-top-color: var(--hav); } .band.tuik .band-h { border-top-color: var(--tuik); }
+.band-h h2 { margin: 0; font-family: var(--f-head); font-weight: 400; font-size: 24px; color: var(--ktb); letter-spacing: .01em; }
+.band.hav h2 { color: var(--hav); } .band.tuik h2 { color: var(--tuik); }
+.band-h .tag { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.band-h .tag a { color: inherit; }
+.band-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--panel); }
+.band-grid > * { box-shadow: 0 0 0 1px var(--line); }
+.band-grid.two { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.band-grid > .stat { background: var(--panel); padding: 14px 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.stat.wide { grid-column: span 2; } .stat.wide2 { grid-column: span 2; }
+@media (max-width: 980px) { .band-grid, .band-grid.four, .band-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .band-grid, .band-grid.four, .band-grid.two { grid-template-columns: 1fr; } .stat.wide, .stat.wide2 { grid-column: auto; } }
+.stat .lbl { font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; font-family: var(--f-head); }
+.stat .big { font-family: var(--f-head); font-size: clamp(30px, 3.4vw, 40px); font-weight: 500; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.stat .big small { font-size: 16px; color: var(--muted); font-weight: 400; }
+.stat .mid { display: block; font-family: var(--f-head); font-size: clamp(24px, 2.6vw, 30px); font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .sub { font-size: 13px; color: var(--muted); }
+.split3 { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); gap: 10px; align-items: start; }
+.split3 .op { font-family: var(--f-head); font-size: 26px; color: var(--muted); padding-top: 2px; }
+.tot { font-family: var(--f-head); font-size: 18px; border-top: 1px dashed var(--line); padding-top: 8px; }
+.tot b { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.diff { font-size: 13px; color: var(--muted); }
+.diff b { color: var(--fg); font-variant-numeric: tabular-nums; }
+.diff a { color: var(--ktb); }
+.band-note { margin: 0; padding: 8px 18px 12px; font-size: 12.5px; color: var(--muted); background: var(--panel); }
+.stat .band-note { padding: 0; }
+.bars { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 7px; }
+.bars li { display: grid; grid-template-columns: 82px minmax(0,1fr) 70px 64px; gap: 10px; align-items: center; font-size: 14px; }
+.bars .nm { white-space: nowrap; }
+.bars .bar { height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; }
+.bars .bar i { display: block; height: 100%; width: var(--w); background: var(--ktb); border-radius: 5px; }
+.band.hav .bars .bar i { background: var(--hav); }
+.bars .nv, .bars .shr { font-variant-numeric: tabular-nums; text-align: right; }
+.bars .shr { color: var(--muted); font-size: 13px; }
+.bars .chg { text-align: right; }
+@media (prefers-reduced-motion: no-preference) { .bars .bar i { animation: grow 1s cubic-bezier(.2,.7,.2,1) both; } }
+@keyframes grow { from { width: 0; } }
+table.mini { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+table.mini th, table.mini td { padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+table.mini th:first-child, table.mini td:first-child { text-align: left; }
+table.mini th { color: var(--muted); font-weight: 500; font-size: 12px; }
+table.mini tr.sum td { font-weight: 600; border-top: 2px solid var(--fg); }
+table.mini tr.sub td { color: var(--muted); }
+table.mini td.up { color: var(--up); } table.mini td.down { color: var(--down); }
+.stat > table.mini { display: block; overflow-x: auto; }
+.chart { width: 100%; min-height: 230px; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart .tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font-size: 12px; white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.lg { display: flex; gap: 14px; font-size: 12.5px; color: var(--muted); }
+.lg i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.sec-title { font-family: var(--f-head); font-weight: 400; font-size: 28px; color: var(--ktb); margin: 34px 0 2px; scroll-margin-top: 60px; text-wrap: balance; }
+.notes { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 20px 14px; max-width: 78ch; }
+.notes section { scroll-margin-top: 60px; }
+.notes h3 { font-family: var(--f-head); font-weight: 500; font-size: 19px; margin: 14px 0 6px; }
+.notes p, .notes li { font-size: 14.5px; }
+.notes ol, .notes ul { padding-left: 1.2rem; display: grid; gap: 6px; }
+.notes table.mini { margin: 8px 0; display: block; overflow-x: auto; }
+.notes { min-width: 0; overflow-wrap: anywhere; }
+.notes section:target { animation: flash 2s ease-out; }
+@keyframes flash { from { background: var(--ktb-soft); } to { background: transparent; } }
+.band { scroll-margin-top: 60px; }
 </style>
 
 <header class="top">
@@ -180,24 +246,72 @@ footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; borde
 
 <nav class="nav" aria-label="Bölümler">
   <div class="wrap">
-    <a href="#A"><b>A</b>Sınır İstatistikleri</a>
-    <a href="#B"><b>B</b>Turizm Gelirleri ve Giderleri</a>
-    <a href="#C"><b>C</b>Konaklama İstatistikleri</a>
-    <a href="#D" class="hav"><b>D</b>Antalya Havalimanı</a>
-    <a href="#E" class="tuik"><b>E</b>TÜİK</a>
-      </div>
+    <a href="#b-hav" class="hav">Havalimanı</a>
+    <a href="#b-tuik" class="tuik">TÜİK</a>
+    <a href="#b-sinir">Sınır</a>
+    <a href="#b-konak">Konaklama</a>
+    <a href="#tum">Tüm İstatistikler</a>
+    <a href="#ek">Ek Tablolar</a>
+    <a href="#notlar">Notlar</a>
+  </div>
 </nav>
 
 <main class="wrap">
-  <section class="kpis" aria-label="Özet">
-    <div class="kpi"><span class="src hav">D · Havalimanı</span><span class="lbl">Havayolu gelen yolcu, Ekim 2026</span><span class="val" data-n="1975277">1.975.277</span><span class="chg down">▼ %8,3 · Ekim 2025: 2.155.231</span></div>
-    <div class="kpi"><span class="src hav">D · Havalimanı</span><span class="lbl">Havayolu gelen yolcu, Ocak–Ekim 2026</span><span class="val" data-n="14993854">14.993.854</span><span class="chg down">▼ %5,8</span></div>
-    <div class="kpi"><span class="src ktb">C · Konaklama</span><span class="lbl">Antalya geceleme, Ocak–Ağustos 2026</span><span class="val"><span data-n="64.4" data-d="1">64,4</span> <small>milyon</small></span><span class="chg down">▼ %11,9</span></div>
-    <div class="kpi"><span class="src ktb">C · Konaklama</span><span class="lbl">Antalya doluluk, Ocak–Ağustos 2026</span><span class="val">%<span data-n="56.29" data-d="2">56,29</span></span><span class="chg down">▼ 3,4 puan</span></div>
-    <div class="kpi"><span class="src tuik">E · TÜİK</span><span class="lbl">Turizm geliri, III. çeyrek 2026</span><span class="val"><span data-n="25.5" data-d="1">25,5</span> <small>milyar $</small></span><span class="chg up">▲ %5,0</span></div>
-    <div class="kpi"><span class="src tuik">E · TÜİK</span><span class="lbl">Çıkış yapan ziyaretçi, III. çeyrek 2026</span><span class="val"><span data-n="23.3" data-d="1">23,3</span> <small>milyon</small></span><span class="chg down">▼ %1,6</span></div>
+  <div class="bands">
+  <section class="band hav" id="b-hav">
+    <div class="band-h"><h2>Antalya Havalimanı Verileri</h2><span class="tag">Son veri: Ekim 2026 · <a href="https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf">kaynak PDF</a></span></div>
+    <div class="band-grid">
+      <div class="stat"><span class="lbl">Dış hattan gelen yolcu · Ekim</span><span class="big" data-n="1975277">1.975.277</span><span class="sub">Ekim 2025: 2.155.231 <span class="chg down">▼ −8,3%</span></span></div>
+      <div class="stat"><span class="lbl">Dış hattan gelen yolcu · Ocak–Ekim</span><span class="big" data-n="14993854">14.993.854</span><span class="sub">Ocak–Ekim 2025: 15.918.756 <span class="chg down">▼ −5,8%</span></span></div>
+      <div class="stat wide"><span class="lbl">İlk 5 milliyet · Ocak–Ekim 2026 (değişim 2025'e göre)</span><ul class="bars"><li><span class="nm">Rusya</span><span class="bar"><i style="--w:100,0%"></i></span><span class="nv">3,77 mn</span><span class="chg down">▼ −1,2%</span></li><li><span class="nm">Almanya</span><span class="bar"><i style="--w:82,1%"></i></span><span class="nv">3,10 mn</span><span class="chg down">▼ −6,7%</span></li><li><span class="nm">İngiltere</span><span class="bar"><i style="--w:34,0%"></i></span><span class="nv">1,28 mn</span><span class="chg down">▼ −11,7%</span></li><li><span class="nm">Polonya</span><span class="bar"><i style="--w:31,2%"></i></span><span class="nv">1,18 mn</span><span class="chg down">▼ −5,5%</span></li><li><span class="nm">Ukrayna</span><span class="bar"><i style="--w:11,5%"></i></span><span class="nv">0,43 mn</span><span class="chg up">▲ +5,7%</span></li></ul></div>
+    </div>
+    <p class="band-note">T.C. vatandaşları dahil · yalnız Antalya Havalimanı (Gazipaşa hariç).</p>
   </section>
+  <section class="band tuik" id="b-tuik">
+    <div class="band-h"><h2>TÜİK Verileri</h2><span class="tag">Son veri: III. çeyrek 2026 · <a href="https://veriportali.tuik.gov.tr/tr/press/58144">bülten</a></span></div>
+    <div class="band-grid four">
+      <div class="stat wide2"><span class="lbl">Çıkış yapan ziyaretçi · Ocak–Eylül 2026</span>
+        <div class="split3">
+          <div><span class="mid" data-n="40031113">40.031.113</span><span class="sub">Yabancı · %83,2 <span class="chg down">▼ −2,0%</span></span></div>
+          <div class="op">+</div>
+          <div><span class="mid" data-n="8063037">8.063.037</span><span class="sub">Yurt dışında ikamet eden vatandaş · %16,8 <span class="chg down">▼ −3,3%</span></span></div>
+        </div>
+        <div class="tot">= <b data-n="48094150">48.094.150</b> toplam <span class="chg down">▼ −2,2%</span></div></div>
+      <div class="stat"><span class="lbl">Çıkış yapan ziyaretçi · III. çeyrek</span><span class="big" data-n="23255007">23.255.007</span><span class="sub">2025 III: 23.639.736 <span class="chg down">▼ −1,6%</span></span></div>
+      <div class="stat"><span class="lbl">Turizm geliri · III. çeyrek</span><span class="big"><span data-n="25.5" data-d="1">25,5</span> <small>milyar $</small></span><span class="sub">2025 III: 24,3 milyar $ <span class="chg up">▲ +5,0%</span></span></div>
+      <div class="stat"><span class="lbl">Gecelik ortalama harcama · III. çeyrek</span><span class="big"><span data-n="107">107</span> <small>$</small></span><span class="sub">2025 III: 100 $ <span class="chg up">▲ +6,7%</span></span></div>
+    </div>
+    <p class="band-note">Vatandaşlar toplamın içindedir; yabancı sayısı toplamdan vatandaş çıkarılarak bulunur. Kaynak: TÜİK, Çıkış Yapan Ziyaretçi Sayısı tablosu.</p>
+  </section>
+  <section class="band ktb" id="b-sinir">
+    <div class="band-h"><h2>Sınır İstatistikleri</h2><span class="tag">Son veri: Eylül 2026 · <a href="https://yigm.ktb.gov.tr/Eklenti/153006,eylul-2026-haber-bultenixls.xls?0">bülten</a></span></div>
+    <div class="band-grid four">
+      <div class="stat wide2"><span class="lbl">Gelen ziyaretçi · Ocak–Eylül 2026</span>
+        <div class="split3">
+          <div><span class="mid" data-n="40938498">40.938.498</span><span class="sub">Yabancı · %83,3 <span class="chg down">▼ −1,5%</span></span></div>
+          <div class="op">+</div>
+          <div><span class="mid" data-n="8193564">8.193.564</span><span class="sub">Yurt dışında ikamet eden vatandaş · %16,7 <span class="chg down">▼ −2,7%</span></span></div>
+        </div>
+        <div class="tot">= <b data-n="49132062">49.132.062</b> toplam <span class="chg down">▼ −1,7%</span></div>
+        <div class="diff">TÜİK ile fark: <b>1.037.912</b> kişi (yabancı 907.385 · vatandaş 130.527) · <a href="#neden-farkli">Neden farklı?</a></div></div>
+      <div class="stat"><span class="lbl">Yabancı ziyaretçi · Ocak–Eylül, ilk 5</span><table class="mini"><thead><tr><th></th><th>2026</th><th>2025’e göre</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>5,70 mn</td><td class=up>+3,1%</td></tr><tr class=""><td>Almanya</td><td>5,17 mn</td><td class=down>−0,9%</td></tr><tr class=""><td>İngiltere</td><td>3,20 mn</td><td class=down>−9,8%</td></tr><tr class=""><td>İran</td><td>2,31 mn</td><td class=up>+0,9%</td></tr><tr class=""><td>Bulgaristan</td><td>2,01 mn</td><td class=down>−1,6%</td></tr><tr class="sub"><td>Diğer</td><td>22,57 mn</td><td class=down>−1,7%</td></tr><tr class="sum"><td>Toplam</td><td>40,94 mn</td><td class=down>−1,5%</td></tr></tbody></table></div>
+      <div class="stat"><span class="lbl">Yabancı ziyaretçi · Eylül, ilk 5</span><table class="mini"><thead><tr><th></th><th>2026</th><th>2025’e göre</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>0,98 mn</td><td class=up>+0,9%</td></tr><tr class=""><td>Almanya</td><td>0,78 mn</td><td class=down>−4,9%</td></tr><tr class=""><td>İngiltere</td><td>0,48 mn</td><td class=down>−10,9%</td></tr><tr class=""><td>İran</td><td>0,39 mn</td><td class=up>+16,1%</td></tr><tr class=""><td>Polonya</td><td>0,30 mn</td><td class=down>−0,9%</td></tr><tr class="sub"><td>Diğer</td><td>3,18 mn</td><td class=up>+2,0%</td></tr><tr class="sum"><td>Toplam</td><td>6,11 mn</td><td class=up>+0,4%</td></tr></tbody></table></div>
+      <div class="stat wide2"><span class="lbl">İllere göre gelen yabancı · Ocak–Eylül 2026 (sınır kapısının bulunduğu il, Türkiye içindeki pay)</span><ul class="bars"><li><span class="nm">İstanbul</span><span class="bar"><i style="--w:100,0%"></i></span><span class="nv">14,38 mn</span><span class="shr">%35,1</span></li><li><span class="nm">Antalya</span><span class="bar"><i style="--w:86,8%"></i></span><span class="nv">12,48 mn</span><span class="shr">%30,5</span></li><li><span class="nm">Muğla</span><span class="bar"><i style="--w:20,1%"></i></span><span class="nv">2,89 mn</span><span class="shr">%7,1</span></li><li><span class="nm">İzmir</span><span class="bar"><i style="--w:8,8%"></i></span><span class="nv">1,27 mn</span><span class="shr">%3,1</span></li><li><span class="nm">Aydın</span><span class="bar"><i style="--w:5,4%"></i></span><span class="nv">0,78 mn</span><span class="shr">%1,9</span></li></ul></div>
+    </div>
+  </section>
+  <section class="band ktb" id="b-konak">
+    <div class="band-h"><h2>Konaklama İstatistikleri</h2><span class="tag">Son veri: Ağustos 2026 · Türkiye, işletme ve basit belgeli tesisler</span></div>
+    <div class="band-grid two">
+      <div class="stat"><table class="mini wide"><thead><tr><th></th><th>Tesise geliş</th><th>Geceleme</th><th>Ort. kalış (gün)</th><th>Doluluk</th></tr></thead><tbody><tr><td>2024</td><td>83,24 mn</td><td>216,0 mn</td><td>2,60</td><td>%51,91</td></tr><tr><td>2025</td><td>98,98 mn</td><td>252,3 mn</td><td>2,55</td><td>%49,54</td></tr><tr><td>2025 Ocak–Ağustos</td><td>62,69 mn</td><td>162,4 mn</td><td>2,59</td><td>%51,15</td></tr><tr><td>2026 Ocak–Ağustos</td><td>71,99 mn</td><td>181,6 mn</td><td>2,52</td><td>%47,07</td></tr></tbody></table>
+        <p class="band-note">Ocak–Ağustos 2026: geceleme <span class="chg up">▲ +11,8%</span> · tesise geliş <span class="chg up">▲ +14,8%</span></p></div>
+      <div class="stat"><span class="lbl">Yıllara göre tesise geliş ve geceleme, 2000–2025 (milyon)</span>
+        <div class="chart" id="konakChart" data-series='[[2000, 14041768, 39110248], [2001, 16073052, 48847812], [2002, 17680698, 58217743], [2003, 17368526, 56974519], [2004, 20662549, 67956116], [2005, 23294348, 74639458], [2006, 23413355, 67939058], [2008, 24923009, 77720083], [2009, 26526486, 82915574], [2010, 29753966, 98158007], [2011, 33614187, 106505481], [2012, 36183162, 121154085], [2013, 38281260, 122682482], [2014, 40901438, 130029917], [2015, 43359970, 133881306], [2016, 36945637, 112545478], [2017, 43047581, 116227696], [2018, 50344818, 144415267], [2019, 56114377, 159148984], [2020, 27166430, 64804422], [2021, 47281139, 123654711], [2022, 70242410, 185902110], [2023, 77298091, 203187830], [2024, 83243556, 216017715], [2025, 98981217, 252323483]]'></div>
+        <p class="band-note">2022'den itibaren basit belgeli tesisler de seride (kesikli çizgi). 2007 yılı bültende yok.</p></div>
+    </div>
+  </section>
+  </div>
 
+  <h2 class="sec-title" id="tum">Tüm Turizm İstatistikleri ve İndirme Linkleri</h2>
   <p class="hint">Mavi-yeşil başlıklar Kültür ve Turizm Bakanlığı (yigm.ktb.gov.tr), lacivert Antalya Havalimanı, mavi TÜİK. Dosya adına tıklayınca dosya iner. Oklar dosyanın içinde ne olduğunu gösterir.</p>
 
   <div class="split">
@@ -218,7 +332,7 @@ footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; borde
               <li>Gelen yabancılar</li>
               <li>İlk 5 ülke <em>Rusya, Almanya, İngiltere, İran, Polonya</em></li>
               <li>Taşıt aracına göre <em>hava, deniz, kara, demiryolu</em></li>
-              <li>İller ve taşıt <span class="fig">Antalya, Eylül: 2.192.864</span> <span class="pill">notundan · bültenle teyit edilecek</span></li>
+              <li>İller ve taşıt <span class="fig">Antalya, Eylül: 2.192.864 yabancı</span></li>
             </ul>
           </div>
         </div>
@@ -360,17 +474,60 @@ footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; borde
   </section>
 
   </div>
-  <aside class="right" aria-label="Sağ taraf">
+  <aside class="right" aria-label="Antalya Havalimanı tabloları">
     <div class="rhead hav"><span class="letter">D</span><h2>ANTALYA HAVALİMANI MÜLKİ İDARE AMİRLİĞİ VERİLERİ</h2></div>
-    <p class="rnote">Kaynak dosya: <a href="https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf">2026 Yılı Ekim Ayı Milliyetlerine Göre Gelen Yolcu Sayıları</a> (pdf, 03.11.2026). Yalnız Antalya Havalimanı dış hat gelen yolcu; T.C. vatandaşları ayrı satırda.</p>
-    <div class="tcard hav"><div class="th">Tablo 1: Milliyetlerine göre Antalya'ya hava yolu ile gelen ziyaretçi sayısı <span>tam yıl</span></div><div class="tscroll">
-<table><thead><tr><th>Milliyet</th><th>2023</th><th>2024</th><th>2025</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.421.650</td><td>3.851.710</td><td>3.965.580</td></tr><tr class=""><td>Almanya</td><td>3.344.963</td><td>3.488.051</td><td>3.533.669</td></tr><tr class=""><td>İngiltere</td><td>1.305.940</td><td>1.552.114</td><td>1.533.498</td></tr><tr class=""><td>Polonya</td><td>1.067.432</td><td>1.263.737</td><td>1.279.108</td></tr><tr class=""><td>Kazakistan</td><td>395.818</td><td>449.385</td><td>375.560</td></tr><tr class="sum"><td>Genel toplam</td><td>15.388.418</td><td>16.526.644</td><td>16.710.721</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2025</span></div></div>
-    <div class="tcard hav"><div class="th">Tablo 2: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ocak–Ekim) <span>2026'ya göre sıralı</span></div><div class="tscroll">
-<table><thead><tr><th>Milliyet</th><th>2025 (ilk 10 ay)</th><th>2026 (ilk 10 ay)</th><th>Artış / azalış</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.818.638</td><td>3.774.677</td><td class="down">−1,2%</td></tr><tr class=""><td>Almanya</td><td>3.322.941</td><td>3.100.042</td><td class="down">−6,7%</td></tr><tr class=""><td>İngi̇ltere</td><td>1.451.986</td><td>1.282.430</td><td class="down">−11,7%</td></tr><tr class=""><td>Polonya</td><td>1.247.070</td><td>1.177.984</td><td class="down">−5,5%</td></tr><tr class=""><td>Ukrayna</td><td>409.185</td><td>432.427</td><td class="up">+5,7%</td></tr><tr class=""><td>Hollanda</td><td>417.878</td><td>406.417</td><td class="down">−2,7%</td></tr><tr class=""><td>Romanya</td><td>409.405</td><td>348.187</td><td class="down">−15,0%</td></tr><tr class=""><td>Kazaki̇stan</td><td>362.833</td><td>344.701</td><td class="down">−5,0%</td></tr><tr class=""><td>Çekya</td><td>287.238</td><td>264.096</td><td class="down">−8,1%</td></tr><tr class=""><td>Li̇tvanya</td><td>236.513</td><td>210.501</td><td class="down">−11,0%</td></tr><tr class=""><td>Slovakya</td><td>196.687</td><td>175.088</td><td class="down">−11,0%</td></tr><tr class=""><td>Belarus</td><td>180.311</td><td>166.571</td><td class="down">−7,6%</td></tr><tr class=""><td>Avusturya</td><td>182.315</td><td>162.930</td><td class="down">−10,6%</td></tr><tr class=""><td>Belçi̇ka</td><td>172.634</td><td>160.853</td><td class="down">−6,8%</td></tr><tr class=""><td>Macari̇stan</td><td>131.595</td><td>150.311</td><td class="up">+14,2%</td></tr><tr class=""><td>İsvi̇çre</td><td>162.713</td><td>141.858</td><td class="down">−12,8%</td></tr><tr class=""><td>Fransa</td><td>170.075</td><td>141.071</td><td class="down">−17,1%</td></tr><tr class=""><td>Moldova</td><td>181.130</td><td>138.928</td><td class="down">−23,3%</td></tr><tr class=""><td>Dani̇marka</td><td>144.960</td><td>133.893</td><td class="down">−7,6%</td></tr><tr class=""><td>İsveç</td><td>139.502</td><td>122.553</td><td class="down">−12,1%</td></tr><tr class=""><td>Norveç</td><td>83.305</td><td>75.260</td><td class="down">−9,7%</td></tr><tr class=""><td>İtalya</td><td>38.071</td><td>32.742</td><td class="down">−14,0%</td></tr><tr class=""><td>Fi̇nlandi̇ya</td><td>35.448</td><td>31.163</td><td class="down">−12,1%</td></tr><tr class=""><td>K.K.T.C.</td><td>20.439</td><td>22.236</td><td class="up">+8,8%</td></tr><tr class=""><td>Slovenya</td><td>16.351</td><td>14.631</td><td class="down">−10,5%</td></tr><tr class=""><td>İran</td><td>43.245</td><td>12.099</td><td class="down">−72,0%</td></tr><tr class=""><td>İsrai̇l</td><td>6.753</td><td>11.006</td><td class="up">+63,0%</td></tr><tr class="sub"><td>Di̇ğer</td><td>1.122.468</td><td>1.050.086</td><td class="down">−6,4%</td></tr><tr class="sub"><td>Türki̇ye (T.C. Vatandaşı)</td><td>927.067</td><td>909.113</td><td class="down">−1,9%</td></tr><tr class="sum"><td>Toplam</td><td>15.918.756</td><td>14.993.854</td><td class="down">−5,8%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
-    <div class="tcard hav"><div class="th">Tablo 3: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ekim) <span>2026'ya göre sıralı</span></div><div class="tscroll">
-<table><thead><tr><th>Milliyet</th><th>Ekim 2025</th><th>Ekim 2026</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Almanya</td><td>631.509</td><td>583.828</td><td class="down">−7,6%</td></tr><tr class=""><td>Rusya</td><td>571.178</td><td>520.371</td><td class="down">−8,9%</td></tr><tr class=""><td>İngi̇ltere</td><td>177.298</td><td>155.686</td><td class="down">−12,2%</td></tr><tr class=""><td>Polonya</td><td>140.632</td><td>128.040</td><td class="down">−9,0%</td></tr><tr class=""><td>Hollanda</td><td>59.484</td><td>53.676</td><td class="down">−9,8%</td></tr><tr class=""><td>Ukrayna</td><td>48.401</td><td>50.251</td><td class="up">+3,8%</td></tr><tr class=""><td>Li̇tvanya</td><td>48.978</td><td>42.619</td><td class="down">−13,0%</td></tr><tr class=""><td>İsvi̇çre</td><td>39.119</td><td>31.929</td><td class="down">−18,4%</td></tr><tr class=""><td>Belarus</td><td>24.558</td><td>23.898</td><td class="down">−2,7%</td></tr><tr class=""><td>Çekya</td><td>20.695</td><td>19.844</td><td class="down">−4,1%</td></tr><tr class=""><td>Estonya</td><td>21.537</td><td>19.251</td><td class="down">−10,6%</td></tr><tr class=""><td>Kazaki̇stan</td><td>17.611</td><td>17.076</td><td class="down">−3,0%</td></tr><tr class=""><td>Dani̇marka</td><td>18.373</td><td>16.969</td><td class="down">−7,6%</td></tr><tr class=""><td>Fransa</td><td>19.847</td><td>16.739</td><td class="down">−15,7%</td></tr><tr class=""><td>Romanya</td><td>14.611</td><td>16.424</td><td class="up">+12,4%</td></tr><tr class=""><td>Avusturya</td><td>16.072</td><td>14.565</td><td class="down">−9,4%</td></tr><tr class=""><td>Belçi̇ka</td><td>19.457</td><td>14.536</td><td class="down">−25,3%</td></tr><tr class=""><td>İsveç</td><td>14.982</td><td>14.459</td><td class="down">−3,5%</td></tr><tr class=""><td>Macari̇stan</td><td>12.113</td><td>12.979</td><td class="up">+7,1%</td></tr><tr class=""><td>Moldova</td><td>13.136</td><td>10.735</td><td class="down">−18,3%</td></tr><tr class=""><td>Norveç</td><td>6.898</td><td>7.571</td><td class="up">+9,8%</td></tr><tr class=""><td>Fi̇nlandi̇ya</td><td>7.146</td><td>6.248</td><td class="down">−12,6%</td></tr><tr class=""><td>İtalya</td><td>4.591</td><td>5.202</td><td class="up">+13,3%</td></tr><tr class=""><td>Slovakya</td><td>5.987</td><td>4.606</td><td class="down">−23,1%</td></tr><tr class=""><td>Sirbi̇stan</td><td>3.275</td><td>2.863</td><td class="down">−12,6%</td></tr><tr class=""><td>Slovenya</td><td>2.231</td><td>2.262</td><td class="up">+1,4%</td></tr><tr class=""><td>Azerbaycan</td><td>2.653</td><td>2.239</td><td class="down">−15,6%</td></tr><tr class=""><td>K.K.T.C.</td><td>1.713</td><td>1.681</td><td class="down">−1,9%</td></tr><tr class=""><td>İran</td><td>2.181</td><td>1.044</td><td class="down">−52,1%</td></tr><tr class=""><td>İsrai̇l</td><td>487</td><td>726</td><td class="up">+49,1%</td></tr><tr class=""><td>Arnavutluk</td><td>673</td><td>610</td><td class="down">−9,4%</td></tr><tr class="sub"><td>Di̇ğer</td><td>88.820</td><td>80.922</td><td class="down">−8,9%</td></tr><tr class="sub"><td>Türki̇ye (T.C. Vatandaşı)</td><td>98.985</td><td>95.428</td><td class="down">−3,6%</td></tr><tr class="sum"><td>Toplam</td><td>2.155.231</td><td>1.975.277</td><td class="down">−8,3%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+    <p class="rnote">Kaynak dosya: <a href="https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf">2026 Yılı Ekim Ayı Milliyetlerine Göre Gelen Yolcu Sayıları</a> (pdf, 03.11.2026). Dış hattan gelen yolcu; toplam satırı T.C. vatandaşlarını da içerir.</p>
+    <div class="tcard hav"><div class="th">Antalya'ya hava yolu ile gelen yolcu, ilk 5 milliyet (Ocak–Ekim) <span></span></div><div class="tscroll"><table><thead><tr><th>Milliyet</th><th>2025 (ilk 10 ay)</th><th>2026 (ilk 10 ay)</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.818.638</td><td>3.774.677</td><td class="down">−1,2%</td></tr><tr class=""><td>Almanya</td><td>3.322.941</td><td>3.100.042</td><td class="down">−6,7%</td></tr><tr class=""><td>İngiltere</td><td>1.451.986</td><td>1.282.430</td><td class="down">−11,7%</td></tr><tr class=""><td>Polonya</td><td>1.247.070</td><td>1.177.984</td><td class="down">−5,5%</td></tr><tr class=""><td>Ukrayna</td><td>409.185</td><td>432.427</td><td class="up">+5,7%</td></tr><tr class="sum"><td>Tüm milliyetler toplamı</td><td>15.918.756</td><td>14.993.854</td><td class="down">−5,8%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+    <div class="tcard hav"><div class="th">Antalya'ya hava yolu ile gelen yolcu, ilk 5 milliyet (Ekim) <span></span></div><div class="tscroll"><table><thead><tr><th>Milliyet</th><th>Ekim 2025</th><th>Ekim 2026</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Almanya</td><td>631.509</td><td>583.828</td><td class="down">−7,6%</td></tr><tr class=""><td>Rusya</td><td>571.178</td><td>520.371</td><td class="down">−8,9%</td></tr><tr class=""><td>İngiltere</td><td>177.298</td><td>155.686</td><td class="down">−12,2%</td></tr><tr class=""><td>Polonya</td><td>140.632</td><td>128.040</td><td class="down">−9,0%</td></tr><tr class=""><td>Hollanda</td><td>59.484</td><td>53.676</td><td class="down">−9,8%</td></tr><tr class="sum"><td>Tüm milliyetler toplamı</td><td>2.155.231</td><td>1.975.277</td><td class="down">−8,3%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
   </aside>
   </div>
+  <h2 class="sec-title" id="ek">Ek İstatistik Tabloları</h2>
+  <p class="hint">Antalya odaklı yedi tablo. Tablo 4–7 konaklama bülteninden; Tablo 5 ve 7'de yabancı ve yerli doluluk, toplam doluluğa katkıdır.</p>
+  <div class="tgrid">
+    <div class="tcard hav"><div class="th">Tablo 1: Milliyetlerine göre Antalya'ya hava yolu ile gelen ziyaretçi sayısı <span>tam yıl</span></div><div class="tscroll"><table><thead><tr><th>Milliyet</th><th>2023</th><th>2024</th><th>2025</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.421.650</td><td>3.851.710</td><td>3.965.580</td></tr><tr class=""><td>Almanya</td><td>3.344.963</td><td>3.488.051</td><td>3.533.669</td></tr><tr class=""><td>İngiltere</td><td>1.305.940</td><td>1.552.114</td><td>1.533.498</td></tr><tr class=""><td>Polonya</td><td>1.067.432</td><td>1.263.737</td><td>1.279.108</td></tr><tr class=""><td>Kazakistan</td><td>395.818</td><td>449.385</td><td>375.560</td></tr><tr class="sum"><td>Genel toplam</td><td>15.388.418</td><td>16.526.644</td><td>16.710.721</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2025</span></div></div>
+    <div class="tcard hav"><div class="th">Tablo 3: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ekim) <span></span></div><div class="tscroll"><table><thead><tr><th>Milliyet</th><th>Ekim 2025</th><th>Ekim 2026</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Almanya</td><td>631.509</td><td>583.828</td><td class="down">−7,6%</td></tr><tr class=""><td>Rusya</td><td>571.178</td><td>520.371</td><td class="down">−8,9%</td></tr><tr class=""><td>İngiltere</td><td>177.298</td><td>155.686</td><td class="down">−12,2%</td></tr><tr class=""><td>Polonya</td><td>140.632</td><td>128.040</td><td class="down">−9,0%</td></tr><tr class=""><td>Hollanda</td><td>59.484</td><td>53.676</td><td class="down">−9,8%</td></tr><tr class=""><td>Ukrayna</td><td>48.401</td><td>50.251</td><td class="up">+3,8%</td></tr><tr class=""><td>Litvanya</td><td>48.978</td><td>42.619</td><td class="down">−13,0%</td></tr><tr class=""><td>İsviçre</td><td>39.119</td><td>31.929</td><td class="down">−18,4%</td></tr><tr class=""><td>Belarus</td><td>24.558</td><td>23.898</td><td class="down">−2,7%</td></tr><tr class=""><td>Çekya</td><td>20.695</td><td>19.844</td><td class="down">−4,1%</td></tr><tr class=""><td>Estonya</td><td>21.537</td><td>19.251</td><td class="down">−10,6%</td></tr><tr class=""><td>Kazakistan</td><td>17.611</td><td>17.076</td><td class="down">−3,0%</td></tr><tr class=""><td>Danimarka</td><td>18.373</td><td>16.969</td><td class="down">−7,6%</td></tr><tr class=""><td>Fransa</td><td>19.847</td><td>16.739</td><td class="down">−15,7%</td></tr><tr class=""><td>Romanya</td><td>14.611</td><td>16.424</td><td class="up">+12,4%</td></tr><tr class=""><td>Avusturya</td><td>16.072</td><td>14.565</td><td class="down">−9,4%</td></tr><tr class=""><td>Belçika</td><td>19.457</td><td>14.536</td><td class="down">−25,3%</td></tr><tr class=""><td>İsveç</td><td>14.982</td><td>14.459</td><td class="down">−3,5%</td></tr><tr class=""><td>Macaristan</td><td>12.113</td><td>12.979</td><td class="up">+7,1%</td></tr><tr class=""><td>Moldova</td><td>13.136</td><td>10.735</td><td class="down">−18,3%</td></tr><tr class=""><td>Norveç</td><td>6.898</td><td>7.571</td><td class="up">+9,8%</td></tr><tr class=""><td>Finlandiya</td><td>7.146</td><td>6.248</td><td class="down">−12,6%</td></tr><tr class=""><td>İtalya</td><td>4.591</td><td>5.202</td><td class="up">+13,3%</td></tr><tr class=""><td>Slovakya</td><td>5.987</td><td>4.606</td><td class="down">−23,1%</td></tr><tr class=""><td>Sırbistan</td><td>3.275</td><td>2.863</td><td class="down">−12,6%</td></tr><tr class=""><td>Slovenya</td><td>2.231</td><td>2.262</td><td class="up">+1,4%</td></tr><tr class=""><td>Azerbaycan</td><td>2.653</td><td>2.239</td><td class="down">−15,6%</td></tr><tr class=""><td>K.K.T.C.</td><td>1.713</td><td>1.681</td><td class="down">−1,9%</td></tr><tr class=""><td>İran</td><td>2.181</td><td>1.044</td><td class="down">−52,1%</td></tr><tr class=""><td>İsrail</td><td>487</td><td>726</td><td class="up">+49,1%</td></tr><tr class=""><td>Arnavutluk</td><td>673</td><td>610</td><td class="down">−9,4%</td></tr><tr class="sub"><td>Diğer</td><td>88.820</td><td>80.922</td><td class="down">−8,9%</td></tr><tr class="sub"><td>Türkiye (T.C. vatandaşı)</td><td>98.985</td><td>95.428</td><td class="down">−3,6%</td></tr><tr class="sum"><td>Toplam</td><td>2.155.231</td><td>1.975.277</td><td class="down">−8,3%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+  </div>
+  <div class="tgrid">
+    <div class="tcard hav"><div class="th">Tablo 2: Antalya'ya 2025–2026 yılında hava yolu ile gelen ziyaretçi (Ocak–Ekim) <span>2026'ya göre sıralı</span></div><div class="tscroll"><table><thead><tr><th>Milliyet</th><th>2025 (ilk 10 ay)</th><th>2026 (ilk 10 ay)</th><th>Değişim</th></tr></thead><tbody><tr class=""><td>Rusya</td><td>3.818.638</td><td>3.774.677</td><td class="down">−1,2%</td></tr><tr class=""><td>Almanya</td><td>3.322.941</td><td>3.100.042</td><td class="down">−6,7%</td></tr><tr class=""><td>İngiltere</td><td>1.451.986</td><td>1.282.430</td><td class="down">−11,7%</td></tr><tr class=""><td>Polonya</td><td>1.247.070</td><td>1.177.984</td><td class="down">−5,5%</td></tr><tr class=""><td>Ukrayna</td><td>409.185</td><td>432.427</td><td class="up">+5,7%</td></tr><tr class=""><td>Hollanda</td><td>417.878</td><td>406.417</td><td class="down">−2,7%</td></tr><tr class=""><td>Romanya</td><td>409.405</td><td>348.187</td><td class="down">−15,0%</td></tr><tr class=""><td>Kazakistan</td><td>362.833</td><td>344.701</td><td class="down">−5,0%</td></tr><tr class=""><td>Çekya</td><td>287.238</td><td>264.096</td><td class="down">−8,1%</td></tr><tr class=""><td>Litvanya</td><td>236.513</td><td>210.501</td><td class="down">−11,0%</td></tr><tr class=""><td>Slovakya</td><td>196.687</td><td>175.088</td><td class="down">−11,0%</td></tr><tr class=""><td>Belarus</td><td>180.311</td><td>166.571</td><td class="down">−7,6%</td></tr><tr class=""><td>Avusturya</td><td>182.315</td><td>162.930</td><td class="down">−10,6%</td></tr><tr class=""><td>Belçika</td><td>172.634</td><td>160.853</td><td class="down">−6,8%</td></tr><tr class=""><td>Macaristan</td><td>131.595</td><td>150.311</td><td class="up">+14,2%</td></tr><tr class=""><td>İsviçre</td><td>162.713</td><td>141.858</td><td class="down">−12,8%</td></tr><tr class=""><td>Fransa</td><td>170.075</td><td>141.071</td><td class="down">−17,1%</td></tr><tr class=""><td>Moldova</td><td>181.130</td><td>138.928</td><td class="down">−23,3%</td></tr><tr class=""><td>Danimarka</td><td>144.960</td><td>133.893</td><td class="down">−7,6%</td></tr><tr class=""><td>İsveç</td><td>139.502</td><td>122.553</td><td class="down">−12,1%</td></tr><tr class=""><td>Norveç</td><td>83.305</td><td>75.260</td><td class="down">−9,7%</td></tr><tr class=""><td>İtalya</td><td>38.071</td><td>32.742</td><td class="down">−14,0%</td></tr><tr class=""><td>Finlandiya</td><td>35.448</td><td>31.163</td><td class="down">−12,1%</td></tr><tr class=""><td>K.K.T.C.</td><td>20.439</td><td>22.236</td><td class="up">+8,8%</td></tr><tr class=""><td>Slovenya</td><td>16.351</td><td>14.631</td><td class="down">−10,5%</td></tr><tr class=""><td>İran</td><td>43.245</td><td>12.099</td><td class="down">−72,0%</td></tr><tr class=""><td>İsrail</td><td>6.753</td><td>11.006</td><td class="up">+63,0%</td></tr><tr class="sub"><td>Diğer</td><td>1.122.468</td><td>1.050.086</td><td class="down">−6,4%</td></tr><tr class="sub"><td>Türkiye (T.C. vatandaşı)</td><td>927.067</td><td>909.113</td><td class="down">−1,9%</td></tr><tr class="sum"><td>Toplam</td><td>15.918.756</td><td>14.993.854</td><td class="down">−5,8%</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: Antalya Havalimanı Mülki İdare Amirliği</span><span>Son gözlem: 2026-10</span></div></div>
+  </div>
+  <div class="tgrid">
+    <div class="tcard "><div class="th">Tablo 4: Geliş ve geceleme sayıları · Türkiye <span></span></div><div class="tscroll"><table><thead><tr class="g"><th></th><th colspan="3">Tesise geliş sayısı</th><th colspan="3">Geceleme</th></tr><tr><th>Dönem</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th></tr></thead><tbody><tr><td>2024</td><td>44.044.950</td><td>39.198.606</td><td>83.243.556</td><td>139.599.507</td><td>76.418.208</td><td>216.017.715</td></tr><tr><td>2025</td><td>48.817.851</td><td>50.163.366</td><td>98.981.217</td><td>154.799.879</td><td>97.523.604</td><td>252.323.483</td></tr><tr><td>2025 Ocak–Ağustos</td><td>30.382.154</td><td>32.311.996</td><td>62.694.150</td><td>98.727.595</td><td>63.688.378</td><td>162.415.973</td></tr><tr><td>2026 Ocak–Ağustos</td><td>32.424.950</td><td>39.567.165</td><td>71.992.115</td><td>103.513.331</td><td>78.043.548</td><td>181.556.879</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: T.C. Kültür ve Turizm Bakanlığı</span><span>Son gözlem: 2026-08</span></div></div>
+    <div class="tcard "><div class="th">Tablo 6: Geliş ve geceleme sayıları · Antalya <span></span></div><div class="tscroll"><table><thead><tr class="g"><th></th><th colspan="3">Tesise geliş sayısı</th><th colspan="3">Geceleme</th></tr><tr><th>Dönem</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th></tr></thead><tbody><tr><td>2024</td><td>23.414.564</td><td>5.083.765</td><td>28.498.329</td><td>87.346.003</td><td>13.392.660</td><td>100.738.663</td></tr><tr><td>2025</td><td>24.156.588</td><td>6.607.043</td><td>30.763.631</td><td>93.951.453</td><td>17.389.181</td><td>111.340.634</td></tr><tr><td>2025 Ocak–Ağustos</td><td>15.277.150</td><td>4.480.943</td><td>19.758.093</td><td>60.939.695</td><td>12.099.676</td><td>73.039.371</td></tr><tr><td>2026 Ocak–Ağustos</td><td>13.323.617</td><td>4.875.258</td><td>18.198.875</td><td>51.519.930</td><td>12.842.877</td><td>64.362.807</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: T.C. Kültür ve Turizm Bakanlığı</span><span>Son gözlem: 2026-08</span></div></div>
+    <div class="tcard "><div class="th">Tablo 5: Ortalama kalış süresi ve doluluk · Türkiye <span></span></div><div class="tscroll"><table><thead><tr class="g"><th></th><th colspan="3">Ortalama kalış (gün)</th><th colspan="3">Doluluk (%)</th></tr><tr><th>Dönem</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th></tr></thead><tbody><tr><td>2024</td><td>3,17</td><td>1,95</td><td>2,60</td><td>33,54</td><td>18,36</td><td>51,91</td></tr><tr><td>2025</td><td>3,17</td><td>1,94</td><td>2,55</td><td>30,40</td><td>19,15</td><td>49,54</td></tr><tr><td>2025 Ocak–Ağustos</td><td>3,25</td><td>1,97</td><td>2,59</td><td>31,09</td><td>20,06</td><td>51,15</td></tr><tr><td>2026 Ocak–Ağustos</td><td>3,19</td><td>1,97</td><td>2,52</td><td>26,82</td><td>20,22</td><td>47,07</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: T.C. Kültür ve Turizm Bakanlığı</span><span>Son gözlem: 2026-08</span></div></div>
+    <div class="tcard "><div class="th">Tablo 7: Ortalama kalış süresi ve doluluk · Antalya <span></span></div><div class="tscroll"><table><thead><tr class="g"><th></th><th colspan="3">Ortalama kalış (gün)</th><th colspan="3">Doluluk (%)</th></tr><tr><th>Dönem</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th><th>Yabancı</th><th>Yerli</th><th>Toplam</th></tr></thead><tbody><tr><td>2024</td><td>3,73</td><td>2,63</td><td>3,53</td><td>59,08</td><td>9,06</td><td>68,14</td></tr><tr><td>2025</td><td>3,65</td><td>2,52</td><td>3,39</td><td>49,14</td><td>9,81</td><td>58,95</td></tr><tr><td>2025 Ocak–Ağustos</td><td>3,99</td><td>2,70</td><td>3,70</td><td>49,24</td><td>10,46</td><td>59,70</td></tr><tr><td>2026 Ocak–Ağustos</td><td>3,87</td><td>2,63</td><td>3,54</td><td>44,71</td><td>11,58</td><td>56,29</td></tr></tbody></table></div><div class="tfoot"><span>Kaynak: T.C. Kültür ve Turizm Bakanlığı</span><span>Son gözlem: 2026-08</span></div></div>
+  </div>
+  <h2 class="sec-title" id="notlar">Notlar ve Yöntem</h2>
+  <article class="notes">
+    <section id="neden-farkli">
+      <h3>TÜİK ile Sınır İstatistikleri neden farklı?</h3>
+      <p>İki kurum aynı ziyaretçiyi farklı noktada sayar: Kültür ve Turizm Bakanlığı (Sınır İstatistikleri) <b>girişte</b>, Emniyet'in pasaport kayıtlarından; TÜİK <b>çıkışta</b>, Emniyet sayımı ve sınır kapısı anketleriyle. Yurt dışında ikamet eden vatandaşlar her iki kaynakta da toplamın <b>içindedir</b>; ayrıca eklenmez.</p>
+      <table class="mini wide"><thead><tr><th>Ocak–Eylül 2026</th><th>Sınır (giriş)</th><th>TÜİK (çıkış)</th><th>Fark</th></tr></thead><tbody>
+        <tr><td>Yabancı</td><td>40.938.498</td><td>40.031.113</td><td>907.385</td></tr>
+        <tr><td>Yurt dışında ikamet eden vatandaş</td><td>8.193.564</td><td>8.063.037</td><td>130.527</td></tr>
+        <tr class="sum"><td>Toplam</td><td>49.132.062</td><td>48.094.150</td><td>1.037.912</td></tr>
+      </tbody></table>
+      <p>Farkın kaynakları:</p>
+      <ol>
+        <li><b>Sayım anı.</b> Sınır, kişiyi geldiği ay; TÜİK, ayrıldığı çeyrekte sayar. Eylül'de gelip Ekim'de ayrılan ziyaretçi Sınır'ın 9 ayında vardır, TÜİK'inkinde yoktur; Aralık'ta gelip Ocak'ta ayrılan için tersi geçerlidir.</li>
+        <li><b>Kapsam.</b> TÜİK, Gaziantep Kargamış, Hatay Cilvegözü, Yayladağı ve Kumlu, Kilis Öncüpınar ve Şanlıurfa Akçakale kapılarından çıkan Suriye vatandaşlarını ziyaretçi saymaz (TÜİK tablo dipnotu). Sınır bülteninde böyle bir ayıklama notu yoktur.</li>
+        <li><b>Yöntem.</b> Sınır rakamı kayıt sayımıdır. TÜİK rakamı anketle ağırlıklandırılmış tahmindir; bu yüzden TÜİK tablosunda küsuratlı değerler görünür (ör. 9.258.128,9).</li>
+      </ol>
+      <p>Sonuç: iki kaynak arasındaki fark toplamın %2,1'idir. Yabancı/vatandaş oranı iki kaynakta neredeyse aynıdır (%83,3 / %16,7 ve %83,2 / %16,8).</p>
+    </section>
+    <section>
+      <h3>Konaklama serisindeki kırılma</h3>
+      <p>2022'den itibaren seri, turizm işletme belgeli tesislere ek olarak basit konaklama turizm işletme belgeli tesisleri (eski belediye belgeli tesisler) de içerir (yıllık bülten dipnotu). 2022 sonrası artışın bir bölümü kapsamın genişlemesinden gelir. Belediye belgeli tesislerin ayrı yayımlanan son verisi 2022 yılına aittir. 2007 yılı yıllık bültende yer almaz.</p>
+    </section>
+    <section>
+      <h3>Tanımlar</h3>
+      <ul>
+        <li><b>Tesise geliş</b> kişi değil, giriş olayıdır: aynı kişi iki tesiste kalırsa iki kez sayılır.</li>
+        <li><b>Doluluk</b> tablolarında yabancı ve yerli sütunları toplam doluluğa katkıdır; ikisinin toplamı toplam doluluğu verir.</li>
+        <li><b>Antalya Havalimanı</b> verisi yalnız Antalya Havalimanı dış hatlarını kapsar (Gazipaşa ve deniz yolu hariç) ve T.C. vatandaşlarını da içerir. Bu yüzden Sınır İstatistikleri'ndeki Antalya yabancı ziyaretçi rakamından farklıdır.</li>
+        <li><b>TÜİK turizm verilerinde</b> il kırılımı yoktur; önceki çeyrek her yeni bültende revize edilebilir.</li>
+      </ul>
+    </section>
+  </article>
 </main>
 
 <footer>
@@ -395,5 +552,60 @@ footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; borde
       requestAnimationFrame(step);
     });
   }
+
+  // Konaklama time series chart
+  (function () {
+    var el = document.getElementById('konakChart'); if (!el) return;
+    var data = JSON.parse(el.getAttribute('data-series'));
+    var NS = 'http://www.w3.org/2000/svg';
+    var css = getComputedStyle(document.documentElement);
+    function draw() {
+      el.innerHTML = '';
+      var W = Math.max(300, el.clientWidth), H = 240, m = { l: 40, r: 14, t: 14, b: 26 };
+      var x0 = 2000, x1 = 2025, ymax = 260;
+      var sx = function (y) { return m.l + (y - x0) / (x1 - x0) * (W - m.l - m.r); };
+      var sy = function (v) { return H - m.b - v / ymax * (H - m.t - m.b); };
+      var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Yıllara göre tesise geliş ve geceleme, 2000–2025');
+      function mk(tag, at) { var n = document.createElementNS(NS, tag); for (var k in at) n.setAttribute(k, at[k]); svg.appendChild(n); return n; }
+      [0, 50, 100, 150, 200, 250].forEach(function (v) {
+        mk('line', { x1: m.l, x2: W - m.r, y1: sy(v), y2: sy(v), stroke: 'var(--line)', 'stroke-width': 1 });
+        var tx = mk('text', { x: m.l - 6, y: sy(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }); tx.textContent = v;
+      });
+      [2000, 2005, 2010, 2015, 2020, 2025].forEach(function (y) {
+        var tx = mk('text', { x: sx(y), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }); tx.textContent = y;
+      });
+      mk('line', { x1: sx(2022), x2: sx(2022), y1: m.t, y2: H - m.b, stroke: 'var(--muted)', 'stroke-dasharray': '4 4', 'stroke-width': 1 });
+      var lb = mk('text', { x: sx(2022) - 4, y: m.t + 10, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }); lb.textContent = 'basit belgeliler dahil →';
+      var series = [{ i: 2, c: 'var(--ktb)', n: 'Geceleme' }, { i: 1, c: 'var(--hav)', n: 'Tesise geliş' }];
+      if (getComputedStyle(el).getPropertyValue('color')) {}
+      series.forEach(function (s) {
+        var d = data.map(function (r, k) { return (k ? 'L' : 'M') + sx(r[0]).toFixed(1) + ' ' + sy(r[s.i] / 1e6).toFixed(1); }).join(' ');
+        var p = mk('path', { d: d, fill: 'none', stroke: s.c, 'stroke-width': 2.2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
+        var len = p.getTotalLength ? p.getTotalLength() : 0;
+        if (len && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          p.style.strokeDasharray = len; p.style.strokeDashoffset = len; p.style.transition = 'stroke-dashoffset 1.4s ease-out';
+          requestAnimationFrame(function () { requestAnimationFrame(function () { p.style.strokeDashoffset = 0; }); });
+        }
+        var last = data[data.length - 1];
+        mk('circle', { cx: sx(last[0]), cy: sy(last[s.i] / 1e6), r: 3.5, fill: s.c });
+      });
+      var hv = mk('line', { y1: m.t, y2: H - m.b, stroke: 'var(--fg)', 'stroke-width': 1, opacity: 0 });
+      el.appendChild(svg);
+      var tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; el.appendChild(tip);
+      svg.addEventListener('mousemove', function (e) {
+        var r = svg.getBoundingClientRect(), px = (e.clientX - r.left) * W / r.width;
+        var best = data.reduce(function (a, b) { return Math.abs(sx(b[0]) - px) < Math.abs(sx(a[0]) - px) ? b : a; });
+        hv.setAttribute('x1', sx(best[0])); hv.setAttribute('x2', sx(best[0])); hv.setAttribute('opacity', .4);
+        tip.hidden = false;
+        tip.innerHTML = '<b>' + best[0] + '</b><br>Geceleme: ' + (best[2] / 1e6).toFixed(1).replace('.', ',') + ' mn<br>Tesise geliş: ' + (best[1] / 1e6).toFixed(1).replace('.', ',') + ' mn';
+        var left = sx(best[0]) / W * r.width; tip.style.left = Math.min(Math.max(left - 60, 0), r.width - 130) + 'px'; tip.style.top = '6px';
+      });
+      svg.addEventListener('mouseleave', function () { tip.hidden = true; hv.setAttribute('opacity', 0); });
+    }
+    var lg = document.createElement('div'); lg.className = 'lg'; lg.innerHTML = '<span><i style="background:var(--ktb)"></i>Geceleme</span><span><i style="background:var(--hav)"></i>Tesise geliş</span>';
+    el.parentNode.insertBefore(lg, el);
+    draw(); var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(draw, 150); });
+  })();
 })();
 </script>
