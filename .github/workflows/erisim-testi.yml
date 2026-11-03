@@ -1,0 +1,20 @@
+name: Erisim testi
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/erisim-testi.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kaynak sitelere ulasiliyor mu?
+        run: |
+          for u in \
+            "https://yigm.ktb.gov.tr/TR-9851/turizm-istatistikleri.html" \
+            "https://yigm.ktb.gov.tr/Eklenti/150204,turizm-geliri-2023-2026xls.xls?0" \
+            "https://veriportali.tuik.gov.tr/tr/press/58144" \
+            "https://www.antalyahavalimani.gov.tr/duyurular" \
+            "https://www.antalyahavalimani.gov.tr/kurumlar/antalyahavalimani.gov.tr/2026/2026-yili-EKIM--web-sayfasi.pdf"; do
+            r=$(curl -s -L -o /tmp/f -w '%{http_code} %{size_download} %{content_type}' --max-time 40 -A "Mozilla/5.0" "$u" || echo "HATA")
+            echo "SONUC | $r | $u"
+          done
