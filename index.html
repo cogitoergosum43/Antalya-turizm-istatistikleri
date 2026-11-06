@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Antalya Turizm İstatistikleri</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +46,7 @@
 body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
 a { color: var(--ktb); }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--ktb-red); outline-offset: 2px; }
-.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .num { font-variant-numeric: tabular-nums; }
 
 /* Header */
@@ -197,7 +201,13 @@ footer { color: var(--muted); font-size: 12.5px; padding-block: 18px 30px; borde
 .diff a { color: var(--ktb); }
 .band-note { margin: 0; padding: 8px 18px 12px; font-size: 12.5px; color: var(--muted); background: var(--panel); }
 .stat .band-note { padding: 0; }
-.top .intro { max-width: 78ch; line-height: 1.55; margin-top: 8px; }
+.top .wrap { align-items: start; }
+.top .wrap > div:first-child { flex: 1 1 560px; min-width: 0; }
+.top .intro { max-width: none; line-height: 1.55; margin-top: 8px; }
+.top .intro-list { margin: 4px 0 0; padding-left: 1.3em; color: var(--muted); line-height: 1.55; }
+.top .intro-list li { margin: 2px 0; }
+.top .stamp { padding-top: 6px; }
+@media (max-width: 620px) { .stat table.mini { display: block; max-width: 100%; overflow-x: auto; white-space: nowrap; } }
 .tgrid > .tcard:only-child { max-width: 760px; }
 footer .author { margin-top: 6px; font-size: 11.5px; letter-spacing: .02em; }
 .top .sign { margin-top: 6px; color: var(--muted); font-style: italic; }
@@ -242,7 +252,12 @@ table.mini td.up { color: var(--up); } table.mini td.down { color: var(--down); 
   <div class="wrap">
     <div>
       <h1>Antalya Turizm İstatistikleri</h1>
-      <p class="intro">Bu sitenin amacı, farklı kanallardan dağınık biçimde yayımlanan turizm verilerini tek sayfada toplu olarak görmek ve analizi kolaylaştırmaktır. Sayfa iki bölümden oluşur: üst kısımda son açıklanan güncel rakamlar, alt kısımda ise bu rakamların alındığı istatistik sitelerinin hazır indirme bağlantıları bulunur. Böylece siteler arasında dolaşmadan, veri dosyalarına tek sayfadan ulaşılabilir. Site, farklı veri kaynakları eklenerek geliştirilmeye devam edecektir.</p>
+      <p class="intro">Bu sitenin amacı, farklı kanallardan dağınık biçimde yayımlanan turizm verilerini tek sayfada toplu olarak görmek ve analizi kolaylaştırmaktır. Sayfa iki bölümden oluşur:</p>
+      <ul class="intro-list">
+        <li>Üst kısımda son açıklanan güncel rakamlar,</li>
+        <li>Alt kısımda ise bu rakamların alındığı istatistik sitelerinin hazır indirme bağlantıları.</li>
+      </ul>
+      <p class="intro">Böylece siteler arasında dolaşmadan, veri dosyalarına tek sayfadan ulaşılabilir. Site, farklı veri kaynakları eklenerek geliştirilmeye devam edecektir.</p>
     </div>
     <div class="stamp">Son güncelleme: <b>06.11.2026</b></div>
   </div>
