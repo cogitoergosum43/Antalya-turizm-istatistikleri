@@ -1,3 +1,5 @@
-# Turizm Panosu
+# Antalya Turizm İstatistikleri
 
-Türkiye turizm istatistikleri panosu: KTB YİGM, TÜİK ve havalimanı verileri. Antalya ile başlıyor.
+Antalya turizm istatistikleri: doluluk, geceleme, turist ve havalimanı yolcu sayıları, Türkiye ile karşılaştırmalı (KTB YİGM, TÜİK, Antalya Havalimanı).
+
+Site: https://cogitoergosum43.github.io/Antalya-turizm-istatistikleri/
